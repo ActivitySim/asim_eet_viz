@@ -37,7 +37,7 @@ When compiling the source notebooks, output data and metadata
 are generated and stored in the file alongside the source.
 In preparation for uploading notebooks to this repository, please remove the output data and metadata to keep the notebooks tidy.
 Functionality is included in the `compile.py` script to do this
-using the `--clean` command line argument. For example:
+using the `--clean` command-line argument. For example:
 ```
 python compile.py --clean
 ```

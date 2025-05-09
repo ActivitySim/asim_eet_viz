@@ -166,4 +166,3 @@ dependencies:
   - zeromq=4.3.5=ha9f60a1_7
   - zipp=3.21.0=pyhd8ed1ab_1
   - zstd=1.5.7=hbeecb71_2
-prefix: C:\Users\will.alexander\AppData\Local\miniconda3\envs\asimviz
