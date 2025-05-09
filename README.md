@@ -1,10 +1,5 @@
----
-title: Introduction
-date: today
----
+# ActivitySim Base-vs.-Build Scenario Comparison Visualizer
 
-
-# Base-vs.-Build Scenario Comparison Visualizer
 This repository contains a set of Jupyter notebooks which
 develop summary statistics and charts for visualizing the
 comparative results of a base and build scenario. The initial
@@ -27,7 +22,7 @@ output visualizations, install the dependencies in the
 `environment.yml` file using `conda env create -n {environment_name}`
 
 ## Output Compilation
-To rebuild the output website, run the `compile.py` script, which
+To build the output website, run the `compile.py` script, which
 will pull a list of Jupyter notebooks from `_quarto.yml` to
 execute. The outputs from these notebooks will be compiled
 into the new website, found in the `output` directory.
