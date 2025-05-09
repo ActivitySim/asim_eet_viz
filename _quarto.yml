@@ -3,8 +3,8 @@ project:
   output-dir: "output"
 
 sources:
-  base: ~/Desktop/activitysim/base
-  build: ~/Desktop/activitysim/build
+  base: ./input/example/base
+  build: ./input/example/build
 
 book:
   title: "ActivitySim Base-Build Comparison Visualization"
@@ -13,11 +13,11 @@ book:
 
   chapters:
     - index.qmd
-    - long_term.ipynb
-    - daily.ipynb
-    - joint.ipynb
-    - tours.ipynb
-    - trips.ipynb
+    - notebooks/long_term.ipynb
+    - notebooks/daily.ipynb
+    - notebooks/joint.ipynb
+    - notebooks/tours.ipynb
+    - notebooks/trips.ipynb
 
 format:
   html:

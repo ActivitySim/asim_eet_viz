@@ -1,7 +1,7 @@
 import nbformat
 import os
 import sys
-from nbconvert.preprocessors import ClearMetadataPreprocessor, ExecutePreprocessor
+from nbconvert.preprocessors import ClearMetadataPreprocessor, ExecutePreprocessor, ClearOutputPreprocessor
 import yaml
 
 """
@@ -37,7 +37,7 @@ def compile():
         with open(filename) as fi:
             nb_in = nbformat.read(fi, nbformat.NO_CONVERT)
 
-        # execute it
+        # execute it 
         ep = ExecutePreprocessor(timeout=600, kernel_name='python3')
         ep.preprocess(nb_in)
 
@@ -57,6 +57,32 @@ def compile():
         print(f"Quarto exited with return value {retval}")
         sys.exit(retval)
 
+def clean():
+    """
+    This method cleans all output from the Jupyter notebooks to make
+    them more appropriate for committing to the repository.
+    """
+    with open('_quarto.yml') as f:
+        cfg = yaml.safe_load(f)
+    
+    # Read the list of Jupyter notebooks from the Quarto YAML config file
+    notebooks = [x for x in cfg['book']['chapters'] if x.endswith('.ipynb')]
+
+    for filename in notebooks:
+
+        print(f"Cleaning notebook {filename}...")
+
+        # open the notebook
+        with open(filename) as fi:
+            nb_in = nbformat.read(fi, nbformat.NO_CONVERT)
+
+        # execute it 
+        cp = ClearOutputPreprocessor(timeout=600, kernel_name='python3')
+        cp.preprocess(nb_in, resources={})
+
 
 if __name__ == "__main__":
-    compile()
+    if "--clean" in sys.argv:
+        clean()
+    else:
+        compile()
