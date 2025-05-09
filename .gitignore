@@ -1,1 +1,6 @@
 /.quarto/
+__pycache__/
+input/base/
+input/build/
+output/
+*.zip

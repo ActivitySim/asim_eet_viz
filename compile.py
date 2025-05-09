@@ -80,6 +80,10 @@ def clean():
         cp = ClearOutputPreprocessor(timeout=600, kernel_name='python3')
         cp.preprocess(nb_in, resources={})
 
+        # write the file back out, with execution results
+        with open(filename, 'w', encoding='utf-8') as fo:
+            nbformat.write(nb_in,fo)
+
 
 if __name__ == "__main__":
     if "--clean" in sys.argv:
