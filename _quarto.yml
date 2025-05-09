@@ -1,0 +1,34 @@
+project:
+  type: book
+  output-dir: "output"
+
+sources:
+  base: ~/Desktop/activitysim/base
+  build: ~/Desktop/activitysim/build
+
+book:
+  title: "ActivitySim Base-Build Comparison Visualization"
+  # repo-url: https://github.com/RSGInc/hts_pyprocess
+  search: false
+
+  chapters:
+    - index.qmd
+    - long_term.ipynb
+    - daily.ipynb
+    - joint.ipynb
+    - tours.ipynb
+    - trips.ipynb
+
+format:
+  html:
+    mainfont: Poppins
+    fontsize: "7"
+    theme:
+      light: [cosmo, custom.scss]
+      dark: [darkly, custom.scss]
+    echo: false
+    code-tools: true
+    # output-file: visualization
+    embed-resources: true
+toc: true
+warning: false

@@ -1,0 +1,19 @@
+---
+title: Introduction
+date: today
+---
+
+
+# Base-vs.-Build Scenario Comparison Visualizer
+
+This repository contains a set of Jupyter notebooks which
+develop summary statistics and charts for visualizing the
+comparative results of a base and build scenario. 
+
+The notebooks all pull base and build data from directories
+specified in `_quarto.yml` under the `sources` setting
+
+To rebuild this website, run the `compile.py` script, which
+will pull a list of Jupyter notebooks from `_quarto.yml` to
+execute. The outputs from these notebooks will be compiled
+into the new website, found in the `output` directory.

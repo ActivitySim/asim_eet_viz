@@ -1,0 +1,292 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "ActivitySim Base-Build Comparison Visualization",
+    "section": "",
+    "text": "1 Base-vs.-Build Scenario Comparison Visualizer\nThis repository contains a set of Jupyter notebooks which develop summary statistics and charts for visualizing the comparative results of a base and build scenario.\nTo rebuild this website, run the compile.py script, which will pull a list of Jupyter notebooks from _quarto.yml to execute. The outputs from these notebooks will be compiled into the new website, found in the output directory.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "long_term.html",
+    "href": "long_term.html",
+    "title": "2  Long-Term Models",
+    "section": "",
+    "text": "2.1 Auto Ownership\nBuild\n0\n1\n2\n3\n4\nTotal\n\n\nBase\n\n\n\n\n\n\n\n\n\n\n0\n146108\n0\n0\n0\n0\n146108\n\n\n1\n0\n360250\n0\n0\n0\n360250\n\n\n2\n0\n0\n473307\n0\n0\n473307\n\n\n3\n1\n0\n0\n190952\n0\n190953\n\n\n4\n0\n0\n0\n0\n106265\n106265\n\n\nTotal\n146109\n360250\n473307\n190952\n106265\n1276883",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Long-Term Models</span>"
+    ]
+  },
+  {
+    "objectID": "long_term.html#work-from-home",
+    "href": "long_term.html#work-from-home",
+    "title": "2  Long-Term Models",
+    "section": "2.2 Work from Home",
+    "text": "2.2 Work from Home\n\n\n\n\n\n\n\n\nBuild\nFalse\nTrue\nTotal\n\n\nBase\n\n\n\n\n\n\n\nFalse\n3150800\n1\n3150801\n\n\nTrue\n0\n132268\n132268\n\n\nTotal\n3150800\n132269\n3283069",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Long-Term Models</span>"
+    ]
+  },
+  {
+    "objectID": "long_term.html#school-location-changes",
+    "href": "long_term.html#school-location-changes",
+    "title": "2  Long-Term Models",
+    "section": "2.3 School Location Changes",
+    "text": "2.3 School Location Changes\n\n\nNo Change    950118\nChange            1\nName: count, dtype: int64",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Long-Term Models</span>"
+    ]
+  },
+  {
+    "objectID": "long_term.html#workplace-location-changes",
+    "href": "long_term.html#workplace-location-changes",
+    "title": "2  Long-Term Models",
+    "section": "2.4 Workplace Location Changes",
+    "text": "2.4 Workplace Location Changes\n\n\nNo Change    1547699\nChange             1\nName: count, dtype: int64",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Long-Term Models</span>"
+    ]
+  },
+  {
+    "objectID": "long_term.html#transit-pass-subsidy",
+    "href": "long_term.html#transit-pass-subsidy",
+    "title": "2  Long-Term Models",
+    "section": "2.5 Transit Pass Subsidy",
+    "text": "2.5 Transit Pass Subsidy\n\n\nLorem ipsum",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Long-Term Models</span>"
+    ]
+  },
+  {
+    "objectID": "long_term.html#transit-pass-ownership",
+    "href": "long_term.html#transit-pass-ownership",
+    "title": "2  Long-Term Models",
+    "section": "2.6 Transit Pass Ownership",
+    "text": "2.6 Transit Pass Ownership\n\n\nLorem ipsum",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Long-Term Models</span>"
+    ]
+  },
+  {
+    "objectID": "long_term.html#free-parking",
+    "href": "long_term.html#free-parking",
+    "title": "2  Long-Term Models",
+    "section": "2.7 Free Parking",
+    "text": "2.7 Free Parking\n\n\nLorem ipsum",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Long-Term Models</span>"
+    ]
+  },
+  {
+    "objectID": "long_term.html#telecommute-frequency",
+    "href": "long_term.html#telecommute-frequency",
+    "title": "2  Long-Term Models",
+    "section": "2.8 Telecommute Frequency",
+    "text": "2.8 Telecommute Frequency\n\n\nLorem ipsum",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Long-Term Models</span>"
+    ]
+  },
+  {
+    "objectID": "long_term.html#transponder-ownership",
+    "href": "long_term.html#transponder-ownership",
+    "title": "2  Long-Term Models",
+    "section": "2.9 Transponder Ownership",
+    "text": "2.9 Transponder Ownership\n\n\n\n\n\n\n\n\nBuild\nFalse\nTrue\nTotal\n\n\nBase\n\n\n\n\n\n\n\nFalse\n1007015\n1\n1007016\n\n\nTrue\n0\n269867\n269867\n\n\nTotal\n1007015\n269868\n1276883",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Long-Term Models</span>"
+    ]
+  },
+  {
+    "objectID": "daily.html",
+    "href": "daily.html",
+    "title": "3  Daily Models",
+    "section": "",
+    "text": "3.1 Coordinated Daily Activity Pattern\nLorem ipsum",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Daily Models</span>"
+    ]
+  },
+  {
+    "objectID": "daily.html#mandatory-tour-frequency",
+    "href": "daily.html#mandatory-tour-frequency",
+    "title": "3  Daily Models",
+    "section": "3.2 Mandatory Tour Frequency",
+    "text": "3.2 Mandatory Tour Frequency\n\n\nLorem ipsum",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Daily Models</span>"
+    ]
+  },
+  {
+    "objectID": "daily.html#mandatory-tour-scheduling",
+    "href": "daily.html#mandatory-tour-scheduling",
+    "title": "3  Daily Models",
+    "section": "3.3 Mandatory Tour Scheduling",
+    "text": "3.3 Mandatory Tour Scheduling\n\n\nLorem ipsum",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Daily Models</span>"
+    ]
+  },
+  {
+    "objectID": "joint.html",
+    "href": "joint.html",
+    "title": "4  Joint Models",
+    "section": "",
+    "text": "4.1 Joint Tour Participation\nLorem ipsum",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Joint Models</span>"
+    ]
+  },
+  {
+    "objectID": "joint.html#joint-tour-destinations",
+    "href": "joint.html#joint-tour-destinations",
+    "title": "4  Joint Models",
+    "section": "4.2 Joint Tour Destinations",
+    "text": "4.2 Joint Tour Destinations\n\n\nNo Change    175891\nChange            1\nName: count, dtype: int64\n\n\n\n\n        \n        \n        \n\n\n                            \n                                            \n\n\n\nOther-MaintenanceOther-DiscretionaryShoppingEat OutSocial\n\n\nNo Change 38089Name: count, dtype: int64\n                            \n                                            \n\n\nNo Change 22167Name: count, dtype: int64\n                            \n                                            \n\n\nNo Change 45102Name: count, dtype: int64\n                            \n                                            \n\n\nNo Change 50901Change 1Name: count, dtype: int64\n                            \n                                            \n\n\nNo Change 19632Name: count, dtype: int64",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Joint Models</span>"
+    ]
+  },
+  {
+    "objectID": "joint.html#joint-tour-scheduling",
+    "href": "joint.html#joint-tour-scheduling",
+    "title": "4  Joint Models",
+    "section": "4.3 Joint Tour Scheduling",
+    "text": "4.3 Joint Tour Scheduling\n\n\nLorem ipsum",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Joint Models</span>"
+    ]
+  },
+  {
+    "objectID": "tours.html",
+    "href": "tours.html",
+    "title": "5  Tour Models",
+    "section": "",
+    "text": "5.1 Non-Mandatory Tour Frequency\nLorem ipsum",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Tour Models</span>"
+    ]
+  },
+  {
+    "objectID": "tours.html#non-mandatory-tour-destinations",
+    "href": "tours.html#non-mandatory-tour-destinations",
+    "title": "5  Tour Models",
+    "section": "5.2 Non-Mandatory Tour Destinations",
+    "text": "5.2 Non-Mandatory Tour Destinations\n\n\nNo Change    2599784\nName: count, dtype: int64\n\n\n\n\n        \n        \n        \n\n\n                            \n                                            \n\n\n\nEscortingOther-MaintenanceOther-DiscretionaryShoppingEat OutSocial\n\n\nNo Change 969214Name: count, dtype: int64\n                            \n                                            \n\n\nNo Change 539465Name: count, dtype: int64\n                            \n                                            \n\n\nNo Change 541205Name: count, dtype: int64\n                            \n                                            \n\n\nNo Change 325470Name: count, dtype: int64\n                            \n                                            \n\n\nNo Change 168866Name: count, dtype: int64\n                            \n                                            \n\n\nNo Change 55564Name: count, dtype: int64",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Tour Models</span>"
+    ]
+  },
+  {
+    "objectID": "tours.html#non-mandatory-tour-scheduling",
+    "href": "tours.html#non-mandatory-tour-scheduling",
+    "title": "5  Tour Models",
+    "section": "5.3 Non-Mandatory Tour Scheduling",
+    "text": "5.3 Non-Mandatory Tour Scheduling\n\n\nLorem ipsum",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Tour Models</span>"
+    ]
+  },
+  {
+    "objectID": "tours.html#tour-mode-choice",
+    "href": "tours.html#tour-mode-choice",
+    "title": "5  Tour Models",
+    "section": "5.4 Tour Mode Choice",
+    "text": "5.4 Tour Mode Choice\n\n\nLorem ipsum",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Tour Models</span>"
+    ]
+  },
+  {
+    "objectID": "tours.html#at-work-subtour-frequency",
+    "href": "tours.html#at-work-subtour-frequency",
+    "title": "5  Tour Models",
+    "section": "5.5 At-Work Subtour Frequency",
+    "text": "5.5 At-Work Subtour Frequency\n\n\nLorem ipsum",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Tour Models</span>"
+    ]
+  },
+  {
+    "objectID": "tours.html#at-work-subtour-destinations",
+    "href": "tours.html#at-work-subtour-destinations",
+    "title": "5  Tour Models",
+    "section": "5.6 At-Work Subtour Destinations",
+    "text": "5.6 At-Work Subtour Destinations\n\n\nNo Change    293779\nName: count, dtype: int64",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Tour Models</span>"
+    ]
+  },
+  {
+    "objectID": "tours.html#at-work-subtour-scheduling",
+    "href": "tours.html#at-work-subtour-scheduling",
+    "title": "5  Tour Models",
+    "section": "5.7 At-Work Subtour Scheduling",
+    "text": "5.7 At-Work Subtour Scheduling\n\n\nLorem ipsum",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Tour Models</span>"
+    ]
+  },
+  {
+    "objectID": "tours.html#at-work-subtour-mode-choice",
+    "href": "tours.html#at-work-subtour-mode-choice",
+    "title": "5  Tour Models",
+    "section": "5.8 At-Work Subtour Mode Choice",
+    "text": "5.8 At-Work Subtour Mode Choice\n\n\nLorem ipsum",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Tour Models</span>"
+    ]
+  },
+  {
+    "objectID": "tours.html#stop-frequency",
+    "href": "tours.html#stop-frequency",
+    "title": "5  Tour Models",
+    "section": "5.9 Stop Frequency",
+    "text": "5.9 Stop Frequency\n\n\nLorem ipsum",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Tour Models</span>"
+    ]
+  },
+  {
+    "objectID": "trips.html",
+    "href": "trips.html",
+    "title": "6  Trip Models",
+    "section": "",
+    "text": "6.1 Trip Purpose\nLorem ipsum",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Trip Models</span>"
+    ]
+  },
+  {
+    "objectID": "trips.html#trip-destination",
+    "href": "trips.html#trip-destination",
+    "title": "6  Trip Models",
+    "section": "6.2 Trip Destination",
+    "text": "6.2 Trip Destination\n\n\nNo Change    3845467\nName: count, dtype: int64",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Trip Models</span>"
+    ]
+  },
+  {
+    "objectID": "trips.html#trip-scheduling",
+    "href": "trips.html#trip-scheduling",
+    "title": "6  Trip Models",
+    "section": "6.3 Trip Scheduling",
+    "text": "6.3 Trip Scheduling\n\n\nLorem ipsum",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Trip Models</span>"
+    ]
+  },
+  {
+    "objectID": "trips.html#trip-mode-choice",
+    "href": "trips.html#trip-mode-choice",
+    "title": "6  Trip Models",
+    "section": "6.4 Trip Mode Choice",
+    "text": "6.4 Trip Mode Choice\n\n\nLorem ipsum",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Trip Models</span>"
+    ]
+  }
+]
