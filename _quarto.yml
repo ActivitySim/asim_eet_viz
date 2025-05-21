@@ -8,7 +8,7 @@ sources:
 
 book:
   title: "ActivitySim Base-Build Comparison Visualization"
-  # repo-url: https://github.com/RSGInc/hts_pyprocess
+  repo-url: https://github.com/ActivitySim/asim_eet_viz
   search: false
 
   chapters:
