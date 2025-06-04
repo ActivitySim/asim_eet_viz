@@ -1,0 +1,6 @@
+---
+title: Affected Zones Only
+date: today
+---
+
+Includes only affected zones

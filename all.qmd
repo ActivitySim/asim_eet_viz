@@ -1,0 +1,6 @@
+---
+title: All Zones
+date: today
+---
+
+Includes all zones

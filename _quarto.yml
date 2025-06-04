@@ -3,8 +3,15 @@ project:
   output-dir: "output"
 
 sources:
+  affected_zones: ./input/example/transit_zones_affected.csv
   base: ./input/example/base
   build: ./input/example/build
+  notebooks:
+  - long_term.ipynb
+  - daily.ipynb
+  - joint.ipynb
+  - tours.ipynb
+  - trips.ipynb
 
 book:
   title: "ActivitySim Base-Build Comparison Visualization"
@@ -13,12 +20,8 @@ book:
 
   chapters:
     - index.qmd
-    - notebooks/long_term.ipynb
-    - notebooks/daily.ipynb
-    - notebooks/joint.ipynb
-    - notebooks/tours.ipynb
-    - notebooks/trips.ipynb
 
+number-sections: true
 format:
   html:
     mainfont: Poppins
