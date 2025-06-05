@@ -96,7 +96,7 @@ def clean(notebooks: list):
         print(f"Cleaning notebook {filename}...")
 
         # open the notebook
-        with open(filename) as fi:
+        with open(f"notebooks/{filename}") as fi:
             nb_in = nbformat.read(fi, nbformat.NO_CONVERT)
 
         # execute it
@@ -104,7 +104,7 @@ def clean(notebooks: list):
         cp.preprocess(nb_in, resources={})
 
         # write the file back out, with execution results
-        with open(filename, "w", encoding="utf-8") as fo:
+        with open(f"notebooks/{filename}", "w", encoding="utf-8") as fo:
             nbformat.write(nb_in, fo)
 
 
