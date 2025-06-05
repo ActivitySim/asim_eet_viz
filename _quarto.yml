@@ -3,7 +3,7 @@ project:
   output-dir: "output"
 
 sources:
-  affected_zones: ./input/example/transit_zones_affected.csv
+  affected_zones: ./input/transit_zones_affected.csv
   base: ./input/example/base
   build: ./input/example/build
   notebooks:
@@ -32,6 +32,6 @@ format:
     echo: false
     code-tools: true
     # output-file: visualization
-    embed-resources: true
+    embed-resources: false
 toc: true
 warning: false
