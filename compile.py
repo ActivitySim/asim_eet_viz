@@ -32,6 +32,7 @@ itself.
 def run_notebooks(
     notebooks: list,
     zone_set: str,
+    how_method: str,
     affected_zones,
 ):
 
@@ -48,6 +49,7 @@ def run_notebooks(
         new_params = nbparam.parameter_values(
             orig_params,
             zone_set=zone_set,
+            how_method=how_method,
             affected_tazs=[int(taz) for taz in affected_zones.taz.unique()],
             affected_mazs=[int(maz) for maz in affected_zones.MAZ.unique()],
         )
@@ -172,6 +174,7 @@ if __name__ == "__main__":
             ), """Missing CSV file containing affected zones"""
 
             affected_zones = pd.read_csv(cfg["sources"]["affected_zones"])
+            how_method = cfg["sources"]["how_method"]
 
             # run for all three sample sets
             for zone_system in ["all", "affected", "unaffected"]:
@@ -180,7 +183,7 @@ if __name__ == "__main__":
                 if not os.path.exists(f"notebooks/{zone_system}"):
                     os.makedirs(f"notebooks/{zone_system}")
 
-                run_notebooks(notebooks, zone_system, affected_zones)
+                run_notebooks(notebooks, zone_system, how_method, affected_zones)
 
             # call the quarto renderer
             compile_quartobook(cfg)

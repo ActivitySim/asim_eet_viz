@@ -6,6 +6,8 @@ sources:
   affected_zones: ./input/transit_zones_affected.csv
   base: ./input/example/base
   build: ./input/example/build
+  how_method: all # Employment -> all, Transit -> any
+
   notebooks:
   - long_term.ipynb
   - daily.ipynb

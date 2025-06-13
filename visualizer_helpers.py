@@ -96,9 +96,9 @@ def create_pie_chart(
     return fig
 
 
-def get_filters(
-    zone_set: str, affected_tazs: list, affected_mazs: list
-) -> tuple[Callable, Callable]:
+def monofilter(
+    zone_set: str, affected_zones: list
+) -> Callable:
     """
     Define filter functions corresponding to zone_set options
 
@@ -109,29 +109,65 @@ def get_filters(
 
     # for all zones
     def allow_all(zone_series: pd.Series) -> pd.Series:
-        return zone_series.apply(lambda _: True)
+        return pd.Series(True, zone_series.index)
 
     # only zones inside the affected area
-    def allow_affected_TAZ(taz_series: pd.Series) -> pd.Series:
-        return taz_series.isin(affected_tazs)
+    def allow_affected_zones(zone_series: pd.Series) -> pd.Series:
+        return zone_series.isin(affected_zones)
 
-    def allow_affected_MAZ(maz_series: pd.Series) -> pd.Series:
-        return maz_series.isin(affected_mazs)
-
-    # only zones outside the affected area
-    def allow_unaffected_TAZ(taz_series: pd.Series) -> pd.Series:
-        return ~allow_affected_TAZ(taz_series)
-
-    def allow_unaffected_MAZ(maz_series: pd.Series) -> pd.Series:
-        return ~allow_affected_MAZ(maz_series)
 
     # select the corresponding filters based on zone_set parameter
     match zone_set:
         case "all":
-            return allow_all, allow_all
+            return allow_all
         case "affected":
-            return allow_affected_TAZ, allow_affected_MAZ
-        case "unaffected":
-            return allow_unaffected_TAZ, allow_unaffected_MAZ
+            return allow_affected_zones
         case _:
-            raise f"Unknown zone set: {zone_set}. Acceptable options: 'all','affected','unaffected'"
+            raise f"Unknown zone set: {zone_set}. Acceptable options: 'all','affected'"
+
+"""
+A method to easily combine multiple zone matches, either requiring all
+or any element to match the filter for the result to be valid
+
+Parameters:
+    how: str                Acceptable inputs: "all" or "any"
+    filterfunc: Callable    function which accepts as input a Series of zones
+                            and returns whether or not they are in the filtered
+                            area, as a Series of booleans
+
+Returns
+    a function which accepts a list of Series of booleans and returns a combined
+    series according to the "how" parameter
+
+"""
+def multifilter(how: str, filterfunc: Callable) -> Callable:
+
+    if how == 'all': # equivalent to AND
+        return lambda series: pd.concat([filterfunc(x) for x in series], axis=1).all(axis=1)
+    elif how == 'any': # equivalent to OR
+        return lambda series: pd.concat([filterfunc(x) for x in series], axis=1).any(axis=1)
+    else:
+        # I don't think there's any need for an XOR, and that isn't straightforward with an
+        # arbitrary number of series (order matters)
+        raise NotImplementedError(f"Unknown how method: {how}")
+    
+
+def get_filters(zone_set:str, how:str, affected_zones: list)->tuple[Callable,Callable]:
+    if zone_set == "all":
+        single_filter: Callable = monofilter('all', affected_zones)
+    else:
+        single_filter: Callable = monofilter('affected', affected_zones)
+    
+    multi_filter: Callable = multifilter(how, single_filter)
+
+    def unaffected_single(x: pd.Series) -> pd.Series:
+        return ~single_filter(x)
+
+    def unaffected_multi(xs: pd.Series) -> pd.Series:
+        return ~multi_filter(xs)
+
+    if zone_set == "unaffected":
+        return unaffected_single, unaffected_multi
+    
+    else:
+        return single_filter, multi_filter
