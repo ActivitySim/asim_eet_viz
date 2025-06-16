@@ -125,27 +125,43 @@ def monofilter(
         case _:
             raise f"Unknown zone set: {zone_set}. Acceptable options: 'all','affected'"
 
-"""
-A method to easily combine multiple zone matches, either requiring all
-or any element to match the filter for the result to be valid
 
-Parameters:
-    how: str                Acceptable inputs: "all" or "any"
-    filterfunc: Callable    function which accepts as input a Series of zones
-                            and returns whether or not they are in the filtered
-                            area, as a Series of booleans
-
-Returns
-    a function which accepts a list of Series of booleans and returns a combined
-    series according to the "how" parameter
-
-"""
 def multifilter(how: str, filterfunc: Callable) -> Callable:
+    """
+    A method to easily combine multiple zone matches, either requiring all
+    or any element to match the filter for the result to be valid. This is
+    commonly used to define whether a filter must be matching for EITHER or 
+    BOTH the origin and/or the destination of a tour or trip.
 
+    Parameters:
+        how: str                Acceptable inputs: "all" or "any"
+        filterfunc: Callable    function which accepts as input a Series of zones
+                                and returns whether or not they are in the filtered
+                                area, as a Series of booleans, i.e. the signature:
+
+                                   def filterfunc(
+                                        in_series: Series[int]   # zone (TAZ/MAZ) ID values
+                                   ) -> Series[bool]:
+                                   
+                                   # where in_series.index == filterfunc(in_series).index
+
+    Returns
+        a function which accepts a list of Series of booleans and returns a combined
+        series according to the "how" parameter, i.e. one with the signature:
+
+        def multifilterfunc(
+            series_list:    list[Series[int]]   # a list of Series of zone ID values for input
+                                                # into the underlying filterfunc
+
+        ) -> Series[bool]   # whether the input index is accepted by the combined filters
+
+    """
     if how == 'all': # equivalent to AND
         return lambda series: pd.concat([filterfunc(x) for x in series], axis=1).all(axis=1)
+    
     elif how == 'any': # equivalent to OR
         return lambda series: pd.concat([filterfunc(x) for x in series], axis=1).any(axis=1)
+    
     else:
         # I don't think there's any need for an XOR, and that isn't straightforward with an
         # arbitrary number of series (order matters)
@@ -153,21 +169,70 @@ def multifilter(how: str, filterfunc: Callable) -> Callable:
     
 
 def get_filters(zone_set:str, how:str, affected_zones: list)->tuple[Callable,Callable]:
+    """
+    A method that returns the appropriate filters for creating affected-area filters.
+
+    This method creates two function objects - one for filtering a single vector of
+    zone IDs, and one for filtering multiple vectors. The latter has the former filter
+    as its underlying filter, and the individual vectors are passed to it individually
+    before they are combined together using the strategy defined by the `how` parameter.
+    
+    The `zone_set` parameter is defined as one of the following options:
+
+        - "all"         the returned filters will include all input records regardless
+                        of the set of zones defined in the `affected_zones` list
+
+        - "affected"    the returned filters will include only the records whose zone
+                        IDs are included in the `affected_zones` list of IDs
+
+        - "unaffected"  the returned filters will include only the records whose zone
+                        IDs are NOT included in the `affected_zones` list of IDs
+    
+    The `how` parameter is defined as one of the following options:
+
+        - "all"         the records which are included by the multifilter are those
+                        for which ALL of the input series are included by the underlying
+                        filter function
+
+        - "any"         the records which are included by the multifilter are those
+                        for which ANY of the input series are included by the underlying
+                        filter function
+
+    The `affected_zones` parameter is a list of zone IDs which define the "affected area"
+    of a study scenario. This list will be used to filter the Series input into the 
+    returned filters, unless the `zone_set` parameter is set to "all".
+
+    The returned tuple is of the format `(monofilter, multifilter)`, where the monofilter
+    accepts a single Series as input and the multifilter accepts a list of Series as input
+
+    """
+
+    assert zone_set in ["all","affected","unaffected"], f"""Unknown `zone_set` parameter: {zone_set}. 
+    Allowed options are 'all', 'affected', and 'unaffected'"""
+
     if zone_set == "all":
+        # this filter is actually a non-filter
         single_filter: Callable = monofilter('all', affected_zones)
+
     else:
+        # these are actually filters using the affected_zones list
         single_filter: Callable = monofilter('affected', affected_zones)
     
+    # construct the multifilter using the newly created monofilter
     multi_filter: Callable = multifilter(how, single_filter)
-
-    def unaffected_single(x: pd.Series) -> pd.Series:
-        return ~single_filter(x)
-
-    def unaffected_multi(xs: pd.Series) -> pd.Series:
-        return ~multi_filter(xs)
-
+   
+   # if we actually want the NEGATION of the affected area
     if zone_set == "unaffected":
+
+        # define the corresponding unaffected-area filters
+        def unaffected_single(x: pd.Series) -> pd.Series:
+            return ~single_filter(x)
+
+        def unaffected_multi(xs: pd.Series) -> pd.Series:
+            return ~multi_filter(xs)
+        
         return unaffected_single, unaffected_multi
     
+    # otherwise return the original filters
     else:
         return single_filter, multi_filter
