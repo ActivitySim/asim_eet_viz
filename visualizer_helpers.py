@@ -27,6 +27,12 @@ COLOR_MAP = {
     "Grey": "#48484A",
 }
 
+LABEL_COLORS = {
+    "Changed": "Orange_light",
+    "Unchanged": "Marine_light",
+    "Newly Created": "Leaf_light",
+    "Removed": "Cherry_light",
+}
 
 def create_bar_chart(
     source_data: pd.DataFrame,
@@ -83,16 +89,21 @@ def create_pie_chart(
 
     # Loop through the columns
     for col, column in enumerate(columns, start=1):
-        fig.add_trace(
-            go.Pie(
+        # build color pallette from labels, if available, otherwise go in order
+        colors = [COLOR_MAP[LABEL_COLORS[df.index[idx]]] if df.index[idx] in LABEL_COLORS
+                  else list(COLOR_MAP.values())[idx % len(COLOR_MAP)]
+                  for idx in range(len(df.index))]
+        
+        pie = go.Pie(
                 labels=df.index,
                 values=df[column],
                 textinfo="label+percent",
+                hoverinfo='value',
                 textposition="outside",
                 automargin=True,
-            ),
-        )
-
+            )
+        pie.marker.colors = colors
+        fig.add_trace(pie)
     return fig
 
 
