@@ -4,3 +4,5 @@ input/base/
 input/build/
 output/
 *.zip
+**/.ipynb_checkpoints/
+output_*/
