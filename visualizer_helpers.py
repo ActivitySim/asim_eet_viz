@@ -32,6 +32,8 @@ LABEL_COLORS = {
     "Unchanged": "Marine_light",
     "Newly Created": "Leaf_light",
     "Removed": "Cherry_light",
+    "Increased": "Leaf",
+    "Decreased": "Cherry",
 }
 
 def create_bar_chart(
@@ -250,7 +252,7 @@ def get_filters(zone_set:str, how:str, affected_zones: list)->tuple[Callable,Cal
     
 def get_time_period_index(
     bin: int,
-    time_period_mapping: Optional[list] = [0, 6, 12, 25, 32, 48],
+    time_period_mapping: Optional[list] = [0,12,22,32,40,48],
 ) -> int:
     """
     Convert a bin number to a time period index.
@@ -264,6 +266,6 @@ def get_time_period_index(
     """
 
     for i, period in enumerate(time_period_mapping):
-        if bin < period:
+        if bin-1 < period:
             return i - 1
     return len(time_period_mapping) - 1

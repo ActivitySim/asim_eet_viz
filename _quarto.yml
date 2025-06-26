@@ -26,7 +26,7 @@ book:
 number-sections: true
 format:
   html:
-    mainfont: Poppins
+    mainfont: sans-serif
     fontsize: "7"
     theme:
       light: [cosmo, custom.scss]
