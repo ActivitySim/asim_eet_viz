@@ -140,7 +140,7 @@ def compile_quartobook(cfg: dict):
 
     # write a temporary yaml with compiled notebooks included
     with open("_quarto.yml", mode="w") as fo:
-        yaml.dump(cfg, fo)
+        yaml.dump(cfg, fo, sort_keys=False)
 
     # combine all notebooks and markdown pages as HTML
     cmd = f"quarto render"
