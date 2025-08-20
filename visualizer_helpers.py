@@ -34,6 +34,8 @@ LABEL_COLORS = {
     "Removed": "Cherry_light",
     "Increased": "Leaf",
     "Decreased": "Cherry",
+    "Workplace moved into area": "Leaf_light",
+    "Workplace moved out of area": "Cherry_light",
 }
 
 def create_bar_chart(
