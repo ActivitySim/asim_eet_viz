@@ -252,7 +252,7 @@ def get_filters(zone_set:str, how:str, affected_zones: list)->tuple[Callable,Cal
     
 def get_time_period_index(
     bin: int,
-    time_period_mapping: Optional[list] = [0,12,22,32,40,48],
+    time_period_mapping: Optional[list] = [0,6,12,25,32,48],
 ) -> int:
     """
     Convert a bin number to a time period index.
