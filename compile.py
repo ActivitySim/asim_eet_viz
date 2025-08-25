@@ -67,11 +67,11 @@ def run_notebooks(
         nb_in = nbparam.replace_definitions(nb_in, new_params)
 
         # execute it
-        ep = ExecutePreprocessor(timeout=600, kernel_name="python3")
+        ep = ExecutePreprocessor(timeout=1000, kernel_name="python3")
         ep.preprocess(nb_in)
 
         # strip out all metadata that causes issues for Quarto
-        cmp = ClearMetadataPreprocessor(timeout=600, kernel_name="python3")
+        cmp = ClearMetadataPreprocessor(timeout=1000, kernel_name="python3")
         # exclude cell tags from removal
         cmp.preserve_cell_metadata_mask |= {"tags"}
         cmp.preprocess(nb_in, resources={})
