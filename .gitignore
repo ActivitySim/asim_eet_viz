@@ -6,3 +6,13 @@ output/
 *.zip
 **/.ipynb_checkpoints/
 output_*/
+
+# tour mode choice sameness investigation
+.DS_Store
+input/tour-mc-data/*
+
+notebooks/*.twbx
+notebooks/tour-mc-investigation-for-tableau.csv
+
+scripts/.Rhistory
+scripts/.Rproj.user/*
