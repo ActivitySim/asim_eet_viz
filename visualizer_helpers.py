@@ -14,6 +14,44 @@ from plotly.subplots import make_subplots
 logger = logging.getLogger(__name__)
 
 
+def read_table(
+    path_without_extension: str,
+    file_format: str = "csv",
+    index_col=None,
+    usecols=None,
+) -> pd.DataFrame:
+    """
+    Read a data table in either CSV or Parquet format.
+
+    Args:
+        path_without_extension (str): Path to the file, without the file extension.
+        file_format (str): Either 'csv' or 'parquet'. Defaults to 'csv'.
+        index_col: Column to use as the row index, passed to read_csv or set_index.
+        usecols: Columns to read, passed to read_csv or used as the columns list for read_parquet.
+
+    Returns:
+        pd.DataFrame
+    """
+    if file_format == "parquet":
+        columns = list(usecols) if usecols is not None else None
+        df = pd.read_parquet(f"{path_without_extension}.parquet", columns=columns)
+        if index_col is not None and df.index.name != index_col and index_col in df.columns:
+            df = df.set_index(index_col)
+        for col in df.columns:
+            if pd.api.types.is_categorical_dtype(df[col]):
+                try:
+                    df[col] = df[col].astype(int)
+                except:
+                    df[col] = df[col].astype(str)
+        return df
+    else:
+        return pd.read_csv(
+            f"{path_without_extension}.csv",
+            index_col=index_col,
+            usecols=usecols,
+        )
+
+
 COLOR_MAP = {
     "Orange_light": "#FAC58F",
     "Marine_light": "#66A8C6",
