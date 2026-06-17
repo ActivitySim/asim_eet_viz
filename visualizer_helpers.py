@@ -10,7 +10,6 @@ import plotly
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -35,7 +34,11 @@ def read_table(
     if file_format == "parquet":
         columns = list(usecols) if usecols is not None else None
         df = pd.read_parquet(f"{path_without_extension}.parquet", columns=columns)
-        if index_col is not None and df.index.name != index_col and index_col in df.columns:
+        if (
+            index_col is not None
+            and df.index.name != index_col
+            and index_col in df.columns
+        ):
             df = df.set_index(index_col)
         for col in df.columns:
             if pd.api.types.is_categorical_dtype(df[col]):
@@ -75,6 +78,7 @@ LABEL_COLORS = {
     "Workplace moved into area": "Leaf_light",
     "Workplace moved out of area": "Cherry_light",
 }
+
 
 def create_bar_chart(
     source_data: pd.DataFrame,
@@ -132,26 +136,29 @@ def create_pie_chart(
     # Loop through the columns
     for col, column in enumerate(columns, start=1):
         # build color pallette from labels, if available, otherwise go in order
-        colors = [COLOR_MAP[LABEL_COLORS[df.index[idx]]] if df.index[idx] in LABEL_COLORS
-                  else list(COLOR_MAP.values())[idx % len(COLOR_MAP)]
-                  for idx in range(len(df.index))]
-        
-        pie = go.Pie(
-                labels=df.index,
-                values=df[column],
-                textinfo="label+percent",
-                hoverinfo='value',
-                textposition="outside",
-                automargin=True,
+        colors = [
+            (
+                COLOR_MAP[LABEL_COLORS[df.index[idx]]]
+                if df.index[idx] in LABEL_COLORS
+                else list(COLOR_MAP.values())[idx % len(COLOR_MAP)]
             )
+            for idx in range(len(df.index))
+        ]
+
+        pie = go.Pie(
+            labels=df.index,
+            values=df[column],
+            textinfo="label+percent",
+            hoverinfo="value",
+            textposition="outside",
+            automargin=True,
+        )
         pie.marker.colors = colors
         fig.add_trace(pie)
     return fig
 
 
-def monofilter(
-    zone_set: str, affected_zones: list
-) -> Callable:
+def monofilter(zone_set: str, affected_zones: list) -> Callable:
     """
     Define filter functions corresponding to zone_set options
 
@@ -168,7 +175,6 @@ def monofilter(
     def allow_affected_zones(zone_series: pd.Series) -> pd.Series:
         return zone_series.isin(affected_zones)
 
-
     # select the corresponding filters based on zone_set parameter
     match zone_set:
         case "all":
@@ -183,7 +189,7 @@ def multifilter(how: str, filterfunc: Callable) -> Callable:
     """
     A method to easily combine multiple zone matches, either requiring all
     or any element to match the filter for the result to be valid. This is
-    commonly used to define whether a filter must be matching for EITHER or 
+    commonly used to define whether a filter must be matching for EITHER or
     BOTH the origin and/or the destination of a tour or trip.
 
     Parameters:
@@ -195,7 +201,7 @@ def multifilter(how: str, filterfunc: Callable) -> Callable:
                                    def filterfunc(
                                         in_series: Series[int]   # zone (TAZ/MAZ) ID values
                                    ) -> Series[bool]:
-                                   
+
                                    # where in_series.index == filterfunc(in_series).index
 
     Returns
@@ -209,19 +215,25 @@ def multifilter(how: str, filterfunc: Callable) -> Callable:
         ) -> Series[bool]   # whether the input index is accepted by the combined filters
 
     """
-    if how == 'all': # equivalent to AND
-        return lambda series: pd.concat([filterfunc(x) for x in series], axis=1).all(axis=1)
-    
-    elif how == 'any': # equivalent to OR
-        return lambda series: pd.concat([filterfunc(x) for x in series], axis=1).any(axis=1)
-    
+    if how == "all":  # equivalent to AND
+        return lambda series: pd.concat([filterfunc(x) for x in series], axis=1).all(
+            axis=1
+        )
+
+    elif how == "any":  # equivalent to OR
+        return lambda series: pd.concat([filterfunc(x) for x in series], axis=1).any(
+            axis=1
+        )
+
     else:
         # I don't think there's any need for an XOR, and that isn't straightforward with an
         # arbitrary number of series (order matters)
         raise NotImplementedError(f"Unknown how method: {how}")
-    
 
-def get_filters(zone_set:str, how:str, affected_zones: list)->tuple[Callable,Callable]:
+
+def get_filters(
+    zone_set: str, how: str, affected_zones: list
+) -> tuple[Callable, Callable]:
     """
     A method that returns the appropriate filters for creating affected-area filters.
 
@@ -229,7 +241,7 @@ def get_filters(zone_set:str, how:str, affected_zones: list)->tuple[Callable,Cal
     zone IDs, and one for filtering multiple vectors. The latter has the former filter
     as its underlying filter, and the individual vectors are passed to it individually
     before they are combined together using the strategy defined by the `how` parameter.
-    
+
     The `zone_set` parameter is defined as one of the following options:
 
         - "all"         the returned filters will include all input records regardless
@@ -240,7 +252,7 @@ def get_filters(zone_set:str, how:str, affected_zones: list)->tuple[Callable,Cal
 
         - "unaffected"  the returned filters will include only the records whose zone
                         IDs are NOT included in the `affected_zones` list of IDs
-    
+
     The `how` parameter is defined as one of the following options:
 
         - "all"         the records which are included by the multifilter are those
@@ -252,7 +264,7 @@ def get_filters(zone_set:str, how:str, affected_zones: list)->tuple[Callable,Cal
                         filter function
 
     The `affected_zones` parameter is a list of zone IDs which define the "affected area"
-    of a study scenario. This list will be used to filter the Series input into the 
+    of a study scenario. This list will be used to filter the Series input into the
     returned filters, unless the `zone_set` parameter is set to "all".
 
     The returned tuple is of the format `(monofilter, multifilter)`, where the monofilter
@@ -260,21 +272,25 @@ def get_filters(zone_set:str, how:str, affected_zones: list)->tuple[Callable,Cal
 
     """
 
-    assert zone_set in ["all","affected","unaffected"], f"""Unknown `zone_set` parameter: {zone_set}. 
+    assert zone_set in [
+        "all",
+        "affected",
+        "unaffected",
+    ], f"""Unknown `zone_set` parameter: {zone_set}. 
     Allowed options are 'all', 'affected', and 'unaffected'"""
 
     if zone_set == "all":
         # this filter is actually a non-filter
-        single_filter: Callable = monofilter('all', affected_zones)
+        single_filter: Callable = monofilter("all", affected_zones)
 
     else:
         # these are actually filters using the affected_zones list
-        single_filter: Callable = monofilter('affected', affected_zones)
-    
+        single_filter: Callable = monofilter("affected", affected_zones)
+
     # construct the multifilter using the newly created monofilter
     multi_filter: Callable = multifilter(how, single_filter)
-   
-   # if we actually want the NEGATION of the affected area
+
+    # if we actually want the NEGATION of the affected area
     if zone_set == "unaffected":
 
         # define the corresponding unaffected-area filters
@@ -283,16 +299,17 @@ def get_filters(zone_set:str, how:str, affected_zones: list)->tuple[Callable,Cal
 
         def unaffected_multi(xs: pd.Series) -> pd.Series:
             return ~multi_filter(xs)
-        
+
         return unaffected_single, unaffected_multi
-    
+
     # otherwise return the original filters
     else:
         return single_filter, multi_filter
-    
+
+
 def get_time_period_index(
     bin: int,
-    time_period_mapping: Optional[list] = [0,6,12,25,32,48],
+    time_period_mapping: Optional[list] = [0, 6, 12, 25, 32, 48],
 ) -> int:
     """
     Convert a bin number to a time period index.
@@ -306,6 +323,6 @@ def get_time_period_index(
     """
 
     for i, period in enumerate(time_period_mapping):
-        if bin-1 < period:
+        if bin - 1 < period:
             return i - 1
     return len(time_period_mapping) - 1
