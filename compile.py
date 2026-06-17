@@ -52,6 +52,7 @@ def run_notebooks(
             how_method=how_method,
             affected_tazs=[int(taz) for taz in affected_zones.taz.unique()],
             affected_mazs=[int(maz) for maz in affected_zones.MAZ.unique()],
+            new='add',
         )
         """
         In the above, I've attempted to use more direct functionality than
