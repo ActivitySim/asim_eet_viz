@@ -169,9 +169,9 @@ if __name__ == "__main__":
 
         try:
             # Get the set of zones being affected in this book
-            assert os.path.exists(
+            assert os.path.exists(os.path.expanduser(
                 cfg["sources"]["affected_zones"]
-            ), """Missing CSV file containing affected zones"""
+            )), """Missing CSV file containing affected zones"""
 
             affected_zones = pd.read_csv(cfg["sources"]["affected_zones"])
             how_method = cfg["sources"]["how_method"]

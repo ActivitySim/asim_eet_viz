@@ -5,9 +5,15 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "ipykernel>=7.3.0",
     "ipython>=9.3.0",
+    "nbconvert>=7.17.1",
+    "nbformat>=5.10.4",
+    "nbparameterise>=0.6.1",
     "pandas>=2.3.0",
+    "plotly>=6.8.0",
     "polars>=1.31.0",
     "polars-lts-cpu>=1.31.0",
     "pyarrow>=20.0.0",
+    "pyyaml>=6.0.3",
 ]
