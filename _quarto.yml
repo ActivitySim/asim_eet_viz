@@ -3,10 +3,11 @@ project:
   output-dir: "output"
 
 sources:
-  affected_zones: ./input/transit_zones_affected.csv
-  base: ./input/example/base
-  build: ./input/example/build
+  affected_zones: "~/Desktop/activitysim/11c_files/inputs/transit_corridor/transit_zones_affected.csv"
+  base: "~/Desktop/activitysim/11c_files/output/output-base-mc/"
+  build: "~/Desktop/activitysim/11c_files/output/output-transit-mc/"
   how_method: all # Employment -> any, Transit -> all
+  file_format: parquet # csv or parquet
 
   notebooks:
   - long_term.ipynb
